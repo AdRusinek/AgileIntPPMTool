@@ -1,6 +1,7 @@
 package com.rusinek.ppmtool.services;
 
 import com.rusinek.ppmtool.domain.Project;
+import com.rusinek.ppmtool.exceptions.ProjectIdException;
 import com.rusinek.ppmtool.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +13,14 @@ public class ProjectService {
     private ProjectRepository projectRepository;
 
     public Project saveOrUpdateProject(Project project) {
+        try {
+            project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
+            return projectRepository.save(project);
+        } catch (Exception e) {
+            throw new ProjectIdException("Project ID '" + project.getProjectIdentifier().toUpperCase()
+                    + "' already exists");
+        }
 
-        // todo there will be a lot of logic there...
-
-        return projectRepository.save(project);
     }
 
 }
