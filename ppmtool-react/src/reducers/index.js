@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
+import errorReducer from "./errorReducer";
 
 export default combineReducers({
-  // it will take all the reducers that i'll create
+  errors: errorReducer
 });

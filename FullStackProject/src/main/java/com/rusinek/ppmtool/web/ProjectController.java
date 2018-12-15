@@ -14,6 +14,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/project")
+@CrossOrigin // this way I can make compatibility with my frontend lh3000 port
 public class ProjectController {
 
     @Autowired
